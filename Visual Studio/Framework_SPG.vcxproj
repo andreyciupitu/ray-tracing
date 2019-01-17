@@ -45,6 +45,7 @@
     <ClCompile Include="..\Source\Main.cpp" />
     <ClCompile Include="..\Source\RayTracingDemo\DemoScene.cpp" />
     <ClCompile Include="..\Source\RayTracingDemo\Physics.cpp" />
+    <ClCompile Include="..\Source\RayTracingDemo\PlaneCollider.cpp" />
     <ClCompile Include="..\Source\RayTracingDemo\SphereCollider.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -80,6 +81,7 @@
     <ClInclude Include="..\Source\RayTracingDemo\Collider.h" />
     <ClInclude Include="..\Source\RayTracingDemo\DemoScene.h" />
     <ClInclude Include="..\Source\RayTracingDemo\Physics.h" />
+    <ClInclude Include="..\Source\RayTracingDemo\PlaneCollider.h" />
     <ClInclude Include="..\Source\RayTracingDemo\SceneObject.h" />
     <ClInclude Include="..\Source\RayTracingDemo\SphereCollider.h" />
   </ItemGroup>

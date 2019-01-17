@@ -50,7 +50,6 @@ struct Material
 	float reflection;
 	
 	float refractionIndex;
-
 	float fresnelAdjust;
 
 	glm::vec4 baseColor;
