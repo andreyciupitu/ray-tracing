@@ -201,6 +201,7 @@ void DemoScene::FrameStart()
 
 void DemoScene::Update(float deltaTimeSeconds)
 {
+	glDrawPixels(window->GetResolution().x, window->GetResolution().y, GL_RGB, GL_UNSIGNED_BYTE, result);
 }
 
 void DemoScene::FrameEnd()
@@ -302,6 +303,7 @@ void DemoScene::Render()
 	glm::ivec2 resolution = window->GetResolution();
 	glm::vec4 viewport = glm::vec4(0.0f, 0.0f, resolution.x, resolution.y);
 	glm::vec3 *image = new glm::vec3[resolution.x * resolution.y];
+	result = new unsigned char[3 * resolution.x * resolution.y];
 	glm::vec3 *pixel = image;
 	
 	// Trace rays
@@ -324,16 +326,18 @@ void DemoScene::Render()
 		}
 	}
 
-	// Save result to a PPM image (keep these flags if you compile under Windows)
-	std::ofstream ofs("./untitled.ppm", std::ios::out | std::ios::binary);
-	ofs << "P6\n" << resolution.x << " " << resolution.y << "\n255\n";
-	for (unsigned i = 0; i < resolution.x * resolution.y; ++i) 
+	// Save a buffer of the pixels 
+	// Flip it around
+	for (int i = 0; i < resolution.y; i++)
 	{
-		ofs << (unsigned char)(std::min(float(1), image[i].x) * 255) <<
-			(unsigned char)(std::min(float(1), image[i].y) * 255) <<
-			(unsigned char)(std::min(float(1), image[i].z) * 255);
+		for (int j = 0; j < resolution.x; j++)
+		{
+			int offset = 3 * ((resolution.y - i) * resolution.x + j);
+			result[offset] = (unsigned char)(std::min(float(1), image[i * resolution.x + j].x) * 255);
+			result[offset + 1] = (unsigned char)(std::min(float(1), image[i * resolution.x + j].y) * 255);
+			result[offset + 2] = (unsigned char)(std::min(float(1), image[i * resolution.x + j].z) * 255);
+		}
 	}
-	ofs.close();
 
 	delete[] image;
 }

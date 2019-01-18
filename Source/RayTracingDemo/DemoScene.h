@@ -37,4 +37,6 @@ private:
 	glm::vec3 backgroundColor;
 	glm::vec3 directionalLight;
 	std::vector<SceneObject*> sceneObjects;
+
+	unsigned char *result;
 };
